@@ -5,7 +5,11 @@ import urllib.parse
 
 from gi import require_version
 
-require_version("Nautilus", "4.0")
+try:
+    require_version("Nautilus", "4.1")
+except ValueError:
+    require_version("Nautilus", "4.0")
+
 require_version("Gtk", "4.0")
 
 TERMINAL_NAME = "app.devsuite.Ptyxis"
