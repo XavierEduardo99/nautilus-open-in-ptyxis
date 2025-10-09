@@ -1,5 +1,7 @@
 # OpenInPtyxis
 
+UNMAINTAINED - I NO LONGER HAVE ANY NEED TO MAINTAIN THIS, HOWEVER I'LL MERGE PR'S THAT HELP OUT THE COMMUNITY
+
 <p>Simple script to open my favorite terminal <a href="https://gitlab.gnome.org/chergert/ptyxis">Ptyxis</a> from Nautilus (Gnome Files) Menu</p>
 
 ## Dependency
