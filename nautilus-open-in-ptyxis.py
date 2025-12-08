@@ -101,11 +101,11 @@ class PtyxisNautilus(GObject.GObject, Nautilus.MenuProvider):
         logging.debug("Opening path:", path)
         args = None
         if native == "ptyxis-terminal":
-            args = ["ptyxis-terminal", "--new-window", "-d", path]
+            args = ["ptyxis-terminal", "--new-window", "-s", "-d", path]
         elif native =="ptyxis":
-            args = ["ptyxis", "--new-window", "-d", path]
+            args = ["ptyxis", "--new-window", "-s", "-d", path]
         else:
-            args = ["/usr/bin/flatpak", "run", TERMINAL_NAME, "--new-window", "-d", path]
+            args = ["/usr/bin/flatpak", "run", TERMINAL_NAME, "--new-window", "-s", "-d", path]
 
         subprocess.Popen(args, cwd=path)
 
