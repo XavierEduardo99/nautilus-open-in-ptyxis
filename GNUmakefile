@@ -50,7 +50,7 @@ clean:
 	
 .PHONY: uninstall
 uninstall: 
-	@rm -fv $(TARGET_DIR) $(BIN_NAME).py
+	@rm -fv /usr/share/nautilus-python/extensions/nautilus-open-in-ptyxis.py
 	@for lang in $$(ls i18n/locale/); do \
 		dest="$(I18N_DIR)$$lang/LC_MESSAGES/$(BIN_NAME).mo"; \
 		if [ -f "$$dest" ]; then \
