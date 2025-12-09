@@ -4,7 +4,7 @@ TARGET_DIR = /usr/share/nautilus-python/extensions
 I18N_DIR = /usr/share/locale/
 I18N_LOCALE_DIR = i18n/locale/
 
-.PHONY: all install restart-nautilus
+.PHONY: all install
 
 all: install
 
@@ -16,7 +16,6 @@ install:
 	fi
 	@install -d "$(TARGET_DIR)"
 	@install -m 644 "$(EXT_PATH)" "$(TARGET_DIR)"
-
 	@for f in i18n/locale/*/LC_MESSAGES/*.mo; do \
 		lang=$$(echo $$f | cut -d'/' -f3); \
 		dest="$(I18N_DIR)$$lang/LC_MESSAGES"; \
@@ -24,13 +23,6 @@ install:
 		install -d -m 755 "$$dest"; \
 		install -m 644 "$$f" "$$dest"; \
 	done
-
-restart-nautilus:
-	@printf "Restart Nautilus(Files)? [y/N] "
-	@read ans; \
-	if [ "$$ans" = "y" ] || [ "$$ans" = "Y" ] || [ "$$ans" = "" ]; then \
-		@nautilus -q; \
-	fi
 
 .PHONY: update-i18n
 update-i18n:
@@ -42,7 +34,6 @@ update-i18n:
 .PHONY: i18n
 i18n:
 	@rm -rf $(I18N_LOCALE_DIR)
-
 	@for f in i18n/*.po; do \
 		lang=$$(basename $$f .po); \
 		outdir="$(I18N_LOCALE_DIR)$$lang/LC_MESSAGES"; \
@@ -51,4 +42,18 @@ i18n:
 		chmod 644 "$(I18N_LOCALE_DIR)$$lang/LC_MESSAGES/$(BIN_NAME).mo"; \
 		chmod 755 "$(I18N_LOCALE_DIR)$$lang/LC_MESSAGES/"; \
 		chmod 755 "$(I18N_LOCALE_DIR)$$lang/"; \
+	done
+	
+.PHONY: clean
+clean:
+	@rm -rf $(I18N_LOCALE_DIR)
+	
+.PHONY: uninstall
+uninstall: 
+	@rm -fv $(TARGET_DIR) $(BIN_NAME).py
+	@for lang in $$(ls i18n/locale/); do \
+		dest="$(I18N_DIR)$$lang/LC_MESSAGES/$(BIN_NAME).mo"; \
+		if [ -f "$$dest" ]; then \
+			rm -fv "$$dest"; \
+		fi; \
 	done

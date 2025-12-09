@@ -13,11 +13,21 @@ sudo apt install python3-nautilus
 sudo dnf install nautilus-python
 ```
 
-## Installation
+## Instructions to Install
 Clone this repository and use the GNUmakefile install script.
 ```
 git clone https://github.com/XavierEduardo99/nautilus-open-in-ptyxis
 cd nautilus-open-in-ptyxis
+make i18n
 sudo make install
-sudo make restart-nautilus
+nautilus -q
+```
+
+## Instructions to Uninstall
+Clone this repository and use the GNUmakefile install script.
+```
+cd nautilus-open-in-ptyxis
+sudo make clean
+sudo make uninstall
+nautilus -q
 ```
